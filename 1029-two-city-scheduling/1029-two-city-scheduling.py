@@ -1,13 +1,5 @@
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
-        diff = list(map(lambda l: l[0] - l[1], costs))
-        diff = [(v, i) for i, v in enumerate(diff)]
-        sort = sorted(diff, key=lambda x: x[0])
-        cost = 0
-        for i in range(len(sort)):
-            idx = sort[i][1]
-            if i < len(sort)//2:
-                cost += costs[idx][0]
-            else:
-                cost += costs[idx][1]
-        return cost
+        sort = sorted(costs, key=lambda x: x[0] - x[1])
+        
+        return sum(list(map(lambda x: x[0], sort[:len(costs)//2]))) + sum(list(map(lambda x: x[1], sort[len(costs)//2:])))
